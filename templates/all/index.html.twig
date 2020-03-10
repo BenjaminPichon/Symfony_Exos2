@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="serieSection">
+        <p>Il y a {{series | length}} series enrgistrées</p>
+        <a href="{{path('series')}}" class="btn btn-primary">Voir la page des series</a>
+    </div>
+
+    <div class="categorieSection">
+        <p>Il y a {{categories | length }} catégories enregistrées</p>
+        {% for categorie in categories %}
+            <li><a href="{{path('categories', {id:categorie.id})}}">{{categorie.nom}}</a> {{categorie.series.count()}}</li>
+        {% endfor %}
+
+        <div class="col-6">
+            {{form(formCategorie)}}
+        </div>
+    </div>
+</div>
+{% endblock %}
